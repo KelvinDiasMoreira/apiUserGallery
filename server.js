@@ -1,5 +1,4 @@
 require('dotenv').config()
-import teste from './src/controllers/index'
 
 const express = require("express")
 const app = express()
