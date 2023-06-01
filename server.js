@@ -1,23 +1,12 @@
 require('dotenv').config()
-
+import teste from './src/controllers/index'
 
 const express = require("express")
 const app = express()
-const mongoose = require("mongoose")
+
+app.listen(process.env.PORT, () =>{
+    console.log(`rodando na porta : ${process.env.PORT}`)
+}) 
 
 
-
-
-mongoose.connect(process.env.SECRET_PASSWORD).then(()=>{
-    console.log("Conectado no db..")
-    app.emit("connectDB")
-})
-
-
-
-
-app.on("connectDB", ()=>{
-    app.listen(process.env.PORT, () =>{
-        console.log(`rodando na porta : ${process.env.PORT}`)
-    })  
-})
+teste();
