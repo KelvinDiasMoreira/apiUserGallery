@@ -1,9 +1,7 @@
-require('dotenv').config()
+(async () => {
+    const database = require('./src/database/connection')
+    const Users = require('./src/models/users')
+    await database.sync({force: true});
 
-const express = require("express")
-const app = express()
-
-app.listen(process.env.PORT, () =>{
-    console.log(`rodando na porta : ${process.env.PORT}`)
-}) 
+})();
 
