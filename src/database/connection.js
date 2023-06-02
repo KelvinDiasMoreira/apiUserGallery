@@ -9,3 +9,5 @@ const database = new Sequelize(process.env.DATABASE, process.env.DATABASE_USERNA
 
 module.exports = database;
 
+
+
