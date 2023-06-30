@@ -1,27 +1,29 @@
-const Sequelize = require('sequelize');;
-const database = require('../database/connection'); 
+const connection = require('../database/connection')
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
-const Users = database.define('Users', {
-    id:{
-        type: Sequelize.INTEGER,
-        autoIncrement: true,
-        primaryKey: true,
-        allowNull: false,
-    },
-    name:{
-        type: Sequelize.STRING,
-        allowNull: false,
-    },
-    password: {
-        type: Sequelize.STRING,
-        allowNull: false,
-    },
-    login: {
-        type: Sequelize.STRING,
-        allowNull: false,
-    },
-})
 
-module.exports = Users;
 
+const getAllNames = async () => {
+    const names = await connection.execute('SELECT * FROM names');
+    return names
+}
+
+const registerUser = async (user) => {
+    const { login, name, password } = user
+
+    const salt = bcrypt.genSaltSync(saltRounds)
+    const hash = bcrypt.hashSync(password, salt)
+
+    const query = "INSERT INTO names(login, name, password) VALUES (?, ? ,?)"
+
+    const [ userRegisted ] = await connection.execute(query, [login, name, hash])
+    return {userId: userRegisted.insertId, response: "Usuário registrado com sucesso"}
+
+}
+
+module.exports= {
+    getAllNames,
+    registerUser
+}
 
