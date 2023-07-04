@@ -11,6 +11,6 @@ router.post('/user/register', middleWares.registerMiddleware ,namesController.re
 
 router.post('/login', middleWares.loginMiddleware, namesController.loginUser)
 
-// router.post('/register/image', upload.single('file'), )
+router.post('/register/image', upload.single('file'), namesController.registerImage )
 
 module.exports = router

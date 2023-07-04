@@ -34,7 +34,7 @@ const loginUser = async (user) => {
     const [result] = await connection.execute(`SELECT * FROM Users WHERE login = '${login}'`)
 
     if (result.length > 0) {
-        const isCorrect = await bcrypt.compare(password, result[0].password).then((value) => { return value})
+        const isCorrect = await bcrypt.compare(password, result[0].password).then((value) => { return value })
         if (isCorrect && login === result[0].login) {
             var secret = result[0].name
             const token = jwt.sign({ userId: result[0].id }, secret, { expiresIn: 500 })
@@ -50,13 +50,30 @@ const loginUser = async (user) => {
     else return false
 }
 
-// const registerImage = async (name, image) => {
-//     const { name } = image
-// }
+const registerImage = async (filename, image) => {
+
+    try {
+        const { name } = filename
+        const { mimetype, size, path } = image
+        const dateNow = new Date(Date.now())
+
+        const query = 'INSERT INTO Images(name, mimetype, size, path, upload_at) VALUES (?, ?, ? ,? ,? ) '
+        const [registeredImage] = await connection.execute(query, [name, mimetype, size, path, dateNow])
+        
+        return { imageId: registeredImage.insertId , response: "Imagem cadastrada com sucesso" }
+
+    } catch (error) {
+        return true
+    }
+
+
+}
 
 module.exports = {
     getAllNames,
     registerUser,
-    loginUser
+    loginUser,
+    registerImage,
+
 }
 
