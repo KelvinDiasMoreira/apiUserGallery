@@ -1,4 +1,6 @@
+require('dotenv').config()
 const express = require('express')
+
 const routes = require('./routes')
 var cors = require('cors')
 const app = express()
@@ -9,8 +11,8 @@ app.use(routes)
 
 
 
-app.listen(3333, () => {
-    console.log("server rodando na porta 3333")
+app.listen(process.env.PORT, () => {
+    console.log(`Server running in port : ${process.env.PORT}`)
 })
 
 module.exports = app

@@ -26,6 +26,10 @@ const loginUser = async(req, res) => {
     
 }
 
+// const registerImage = async (req, res) =>{
+//     const imageRegistered = await usersModel.registerImage(req.body, req.file)
+// }
+
 module.exports = {
     getAll,
     registerUser,

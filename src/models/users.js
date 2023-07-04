@@ -50,6 +50,10 @@ const loginUser = async (user) => {
     else return false
 }
 
+// const registerImage = async (name, image) => {
+//     const { name } = image
+// }
+
 module.exports = {
     getAllNames,
     registerUser,
