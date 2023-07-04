@@ -2,7 +2,6 @@ const usersModel = require('../models/users')
 
 const getAll = async (req, res) => {
     const  names  = await usersModel.getAllNames()
-    console.log("alguem olhou os usuários")
     return res.status(200).json(names)
 }
 
@@ -20,7 +19,6 @@ const loginUser = async(req, res) => {
     if(userLogged === false){
         return res.status(401).end()
     }
-    console.log("alguem logou")
     return res.status(200).send(userLogged)
 }
 
