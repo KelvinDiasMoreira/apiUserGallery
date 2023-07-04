@@ -36,11 +36,11 @@ const deleteImage = async (param) => {
         const { id } = param
         const [image] = await connection.execute(`SELECT * FROM Images WHERE id = '${id}'`)
         const newPath = `${process.env.DATABASE_PATH_DELETE}${image[0].path.split('/')[4]}`
-        
+
         const [deleteImage] = await connection.execute(`DELETE FROM Images WHERE id = '${(id)}'`)
 
         fs.unlinkSync(newPath, (err) => {
-            if(err){
+            if (err) {
                 console.log(err)
             }
         })

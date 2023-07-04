@@ -6,13 +6,16 @@ const imagesController = require('./controllers/imagesControllers')
 const middleWares = require('./middleware/middlewares')
 const upload = require('./config/multer')
 
+
 router.get('/users', namesController.getAll)
 
-router.get('/images', imagesController.getAllImages)
+router.post('/login', middleWares.loginMiddleware, namesController.loginUser)
 
 router.post('/user/register', middleWares.registerMiddleware ,namesController.registerUser)
 
-router.post('/login', middleWares.loginMiddleware, namesController.loginUser)
+
+
+router.get('/images', imagesController.getAllImages)
 
 router.post('/register/image', upload.single('file'), imagesController.registerImage )
 

@@ -1,8 +1,8 @@
-const imageModel = require('../models/images')
+const imagesModel = require('../models/images')
 
 
-const registerImage = async (req, res) =>{
-    const imageRegistered = await imageModel.registerImage(req.file)
+const registerImage = async (req, res) => {
+    const imageRegistered = await imagesModel.registerImage(req.file)
     if (imageRegistered === true) {
         return res.status(409).end()
     }
@@ -10,16 +10,16 @@ const registerImage = async (req, res) =>{
 }
 
 const getAllImages = async (req, res) => {
-    const allImages = await imageModel.getAllImages()
+    const allImages = await imagesModel.getAllImages()
     return res.status(200).json(allImages)
 }
 
-const deleteImage = async (req , res) => {
-    const deleteImage = await imageModel.deleteImage(req.params)
+const deleteImage = async (req, res) => {
+    const deleteImage = await imagesModel.deleteImage(req.params)
     return res.status(200).json(deleteImage)
 }
 
-module.exports={
+module.exports = {
     registerImage,
     getAllImages,
     deleteImage,
