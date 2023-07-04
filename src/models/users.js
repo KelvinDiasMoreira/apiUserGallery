@@ -1,7 +1,8 @@
-const bcrypt = require('bcrypt');
 const connection = require('../database/connection')
-const hashPassword = require('../scripts/hashPassword')
+const bcrypt = require('bcrypt');
 var jwt = require('jsonwebtoken');
+
+const hashPassword = require('../scripts/hashPassword')
 
 const getAllNames = async () => {
     const [names] = await connection.execute('SELECT * FROM Users');
@@ -50,30 +51,10 @@ const loginUser = async (user) => {
     else return false
 }
 
-const registerImage = async (filename, image) => {
-
-    try {
-        const { name } = filename
-        const { mimetype, size, path } = image
-        const dateNow = new Date(Date.now())
-
-        const query = 'INSERT INTO Images(name, mimetype, size, path, upload_at) VALUES (?, ?, ? ,? ,? ) '
-        const [registeredImage] = await connection.execute(query, [name, mimetype, size, path, dateNow])
-        
-        return { imageId: registeredImage.insertId , response: "Imagem cadastrada com sucesso" }
-
-    } catch (error) {
-        return true
-    }
-
-
-}
 
 module.exports = {
     getAllNames,
     registerUser,
     loginUser,
-    registerImage,
-
 }
 

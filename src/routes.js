@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 
 const namesController = require('./controllers/usersControllers')
+const imagesController = require('./controllers/imagesControllers')
 const middleWares = require('./middleware/middlewares')
 const upload = require('./config/multer')
 
@@ -11,6 +12,6 @@ router.post('/user/register', middleWares.registerMiddleware ,namesController.re
 
 router.post('/login', middleWares.loginMiddleware, namesController.loginUser)
 
-router.post('/register/image', upload.single('file'), namesController.registerImage )
+router.post('/register/image', upload.single('file'), imagesController.registerImage )
 
 module.exports = router
