@@ -13,7 +13,12 @@ const registerImage = async (image) => {
         const query = 'INSERT INTO Images(name, mimetype, size, path, upload_at) VALUES (?, ?, ? ,? ,? ) '
         const [registeredImage] = await connection.execute(query, [originalname, mimetype, size, newPath, dateNow])
 
-        return { imageName: originalname, imageId: registeredImage.insertId, path: newPath, response: "Imagem cadastrada com sucesso" }
+        return {
+            imageName: originalname,
+            imageId: registeredImage.insertId,
+            path: newPath,
+            response:"Imagem cadastrada com sucesso"
+    }
 
     } catch (error) {
         return true
