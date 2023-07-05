@@ -1,14 +1,13 @@
 require('dotenv').config()
 var fs = require('fs');
-const path = require('path')
 const connection = require('../database/connection')
 
 const registerImage = async (image) => {
 
     try {
-        const { mimetype, size, originalname } = image
+        const { mimetype, size, originalname, filename } = image
         const dateNow = new Date(Date.now())
-        const newPath = `${process.env.DATABASE_PATH_IMG}${image.filename}`
+        const newPath = `${process.env.DATABASE_PATH_IMG}${filename}`
 
         const query = 'INSERT INTO Images(name, mimetype, size, path, upload_at) VALUES (?, ?, ? ,? ,? ) '
         const [registeredImage] = await connection.execute(query, [originalname, mimetype, size, newPath, dateNow])
